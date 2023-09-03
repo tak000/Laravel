@@ -5,10 +5,9 @@ on:
     branches:
       - main
 
-environment: ci
-
 jobs:
   build-and-push:
+    environment: ci
     runs-on: ubuntu-latest
 
     steps:
