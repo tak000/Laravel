@@ -1,19 +1,7 @@
 services:
-  generator:
-    container_name: generator-iut
-    build: 
-      dockerfile: ./generator.dockerfile
-    volumes:
-      - ./app:/var/www/app
-    networks:
-      - iut
-
   app:
-    image: dhonnabhainb:laravel-latest
+    image: dhonnabhainb/iut-laravel
     container_name: app-iut
-    # build:
-    #   context: ./app
-    #   dockerfile: ../dockerfile
     restart: unless-stopped
     tty: true
     volumes:
