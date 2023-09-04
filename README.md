@@ -34,6 +34,7 @@ To make your project as portable as possible, everything you need is in the `app
 	- Set `IUT` in **Title** field
 	- Paste the `.docker/ssh/id_ed25519.pub` content in **Key** field
 - Congratulations 🎉
+- Your application can be seen at [localhost:8051](http://localhost:8051)
 
 > Ensure you have correctly save the `.docker/ssh` content in case of someone's dog eat your computer
 
