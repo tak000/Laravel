@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\GetPasswordsController;
+use App\Http\Controllers\PasswordsController;
+use App\Http\Controllers\TeamController;
 
 
 /*
@@ -31,19 +31,19 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/add-password', function () {
+    return view('add-password');
+})->name('add-password');
 
-Route::get('/formulaire', function () {
-    return view('form');
-})->name('formulaire');
+Route::post('/post-login', [PasswordsController::class, 'store']);
+Route::get('/passwords', [PasswordsController::class, 'getPasswords'])->name('passwords');
 
+Route::get('/password-change/{id}', [PasswordsController::class, 'passwordChangePage'])->name('password-change');
+Route::post('/edit-password', [PasswordsController::class, 'editPassword'])->name('edit-password');
 
-Route::post('/post-login', [LoginController::class, 'store']);
-Route::get('/passwords', [GetPasswordsController::class, 'getPasswords'])->name('passwords');
-
-
-// TODO dynamic route
-Route::get('/formulaire', function () {
-    return view('form');
-})->name('formulaire');
+Route::get('/create-team', function () {
+    return view('create-team');
+})->name('create-team');
+Route::post('/post-team', [TeamController::class, 'store']);
 
 require __DIR__.'/auth.php';

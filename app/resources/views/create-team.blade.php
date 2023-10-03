@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel - Mots de passes enregistré</title>
+        <title>Laravel - formulaire</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -16,67 +16,81 @@
         </style>
     </head>
     <body class="antialiased">
+            
+    <x-app-layout>
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                {{ __('Make a team') }}
+            </h2>
+        </x-slot>
 
-        <x-app-layout>
-            <x-slot name="header">
-                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                    {{ __('See passwords') }}
-                </h2>
-            </x-slot>
-            <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-                <div class="max-w-7xl mx-auto p-6 lg:p-8">
-                    <style>
-                        .mt-16 :is(table, td, th){
-                            color: white;
-                            border: 1px solid #FF2D20;
-                        }
+        <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
+            @if (Route::has('login'))
+                <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
+                    @auth
+                        <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</a>
+                    @else
+                        <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
 
-                        .mt-16 th{
-                            background-color: #FF2D20;
-                        }
-
-                        .mt-16 td{
-                            padding: 5px 20px;
-                        }
-                    </style>
-
-                    <div class="mt-16">
-                        @if (Route::has('login'))
-                            @auth
-                            <table>
-                                <tr>
-                                    <th>Site</th>
-                                    <th>Login</th>
-                                    <th>Password</th>
-                                    <th></th>
-                                </tr>
-
-                                @foreach ($data as $password)
-                                    <tr>
-                                        <td>{{ $password->site }}</td>
-                                        <td>{{ $password->login }}</td>
-                                        <td>{{ $password->password }}</td>
-                                        <td>
-                                        <x-nav-link :href="route('password-change', ['id' => $password->id])">
-                                            modifier
-                                        </x-nav-link>
-                                        </td>
-                                    </tr>
-                                @endforeach
-
-                            </table> 
-                            @else
-                            <h2>Connecter vous d'abord</h2>
-                            @endauth
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
                         @endif
+                    @endauth
+                </div>
+            @endif
+
+            <div class="max-w-7xl mx-auto p-6 lg:p-8">
+                
+                <!-- style custom -->
+                <style>
+                    form{
+                        color: white; 
+                        display: flex; 
+                        flex-direction: column;
+                    }
+
+                    form input[type="submit"]{
+                        margin-top: 6px;
+                        background-color:#FF2D20 !important;
+                        cursor: pointer;
+                        border-radius: 3px;
+                    }
+
+                    form input{
+                        color: black;
+                    }
+
+                    form p{
+                        color:#FF2D20;
+                    }
+
+
+                    #error {
+                        display:none;
+                        margin-top:1vh;
+                        background-color:#FF2D20;
+                        color:white;
+                        border-radius: 10px;
+                        padding:10px;
+                    }
+                </style>
+
+                <div class="mt-16">
+                    <form method="POST" action="/post-team">
+                        @csrf
+                        <label for="name">Entrer votre nom de groupe</label>
+                        <input type="text" name="name" require>
+                        @if($errors->has('name'))
+                            <p>{{$errors->first('name')}}</p>
+                        @endif
+                        <input type="submit" value="Créer">
                         
-                    </div>
+                    </form>
+                </div>
 
                 </div>
-            </div>
-        </x-app-layout>
-        
+        </div>
+    </x-app-layout>
+
     </body>
 </html>
-
-

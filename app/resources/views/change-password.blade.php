@@ -20,27 +20,56 @@
         <x-app-layout>
             <x-slot name="header">
                 <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                    {{ __('See passwords') }}
+                    {{ __('Modify password') }}
                 </h2>
             </x-slot>
             <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
                 <div class="max-w-7xl mx-auto p-6 lg:p-8">
                     <style>
-                        .mt-16 :is(table, td, th){
-                            color: white;
-                            border: 1px solid #FF2D20;
+                        form{
+                        color: white; 
+                        display: flex; 
+                        flex-direction: column;
                         }
 
-                        .mt-16 th{
-                            background-color: #FF2D20;
+                        form input[type="submit"]{
+                            margin-top: 6px;
+                            background-color:#FF2D20 !important;
+                            cursor: pointer;
+                            border-radius: 3px;
                         }
 
-                        .mt-16 td{
-                            padding: 5px 20px;
+                        form input{
+                            color: black;
+                        }
+
+                        form p{
+                            color:#FF2D20;
+                        }
+
+                        .mt-16{
+                            margin-top:0;
                         }
                     </style>
 
                     <div class="mt-16">
+                        @if (Route::has('login'))
+                            @auth
+
+                            <form method="POST" action="/edit-password">
+                                @csrf
+                                <input type="hidden" value="{{$id}}" name="id">
+                                <label for="password">Entrer votre nouveau mot de passe</label>
+                                <input type="text" name="password" require>
+                                <input type="submit" value="Enregistrer">
+                                
+                            </form>
+                            
+                            @else
+                            <h2>Connecter vous d'abord</h2>
+                            @endauth
+                        
+                        @endif
 
                     
                     

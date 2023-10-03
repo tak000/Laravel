@@ -15,11 +15,14 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('formulaire')" :active="request()->routeIs('formulaire')">
+                    <x-nav-link :href="route('add-password')" :active="request()->routeIs('add-password')">
                         {{ __('Register password') }}
                     </x-nav-link>
                     <x-nav-link :href="route('passwords')" :active="request()->routeIs('passwords')">
                         {{ __('See passwords') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('create-team')" :active="request()->routeIs('create-team')">
+                        {{ __('Make a team') }}
                     </x-nav-link>
                 </div>
             </div>

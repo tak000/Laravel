@@ -9,16 +9,13 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 use Validator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Auth;
-// use Illuminate\Support\Facades\Crypt;
 
 
-class LoginController extends Controller
+class PasswordsController extends Controller
 {
-
-
 
     public function store(Request $request): RedirectResponse
     {
@@ -36,7 +33,6 @@ class LoginController extends Controller
         }
 
         // Crypt::encryptString()
-
         Password::create([
             'site' => $validated->validated()['url'],
             'login' => $validated->validated()['login'],
@@ -44,13 +40,33 @@ class LoginController extends Controller
             'user_id' => Auth::id()
         ]);
 
-
-
         // Storage::put(Str::uuid().'.json', json_encode($validated->validated()));
         
  
-        return redirect('/formulaire');
+        return redirect('/passwords');
     }
 
 
+    public function getPasswords()
+    {
+        $data = Password::where('user_id', Auth::id())->get();
+         // dd(Crypt::decryptString($data[5]->password));
+
+        return view('passwords',['data'=>$data]);
+    }
+
+    public function passwordChangePage($id)
+    {
+        // TODO faire un check de securite avec auth::id et user_id du mot de passe
+        $data = Password::where('id', $id)->get();
+        return view('change-password', ['id'=>$id]);
+    }
+
+    public function editPassword(Request $request)
+    {
+        Password::where('id', $request->id)->first()->update(['password' => $request->password]);
+        return redirect('/passwords');
+    }
+
 }
+
