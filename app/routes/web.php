@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\GetPasswordsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -36,5 +38,12 @@ Route::get('/formulaire', function () {
 
 
 Route::post('/post-login', [LoginController::class, 'store']);
+Route::get('/passwords', [GetPasswordsController::class, 'getPasswords'])->name('passwords');
+
+
+// TODO dynamic route
+Route::get('/formulaire', function () {
+    return view('form');
+})->name('formulaire');
 
 require __DIR__.'/auth.php';

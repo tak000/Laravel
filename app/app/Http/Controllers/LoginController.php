@@ -12,6 +12,7 @@ use Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Crypt;
 
 
 class LoginController extends Controller
@@ -24,7 +25,7 @@ class LoginController extends Controller
 
         $validated = Validator::make($request->all(),[
             'url' => 'required|url',
-            'email' => 'required|email',
+            'login' => 'required|string',
             'password' => 'required|string'
         ]);
 
@@ -34,11 +35,11 @@ class LoginController extends Controller
                 ->withInput();
         }
 
-
+        // Crypt::encryptString()
 
         Password::create([
             'site' => $validated->validated()['url'],
-            'login' => $validated->validated()['email'],
+            'login' => $validated->validated()['login'],
             'password' => $validated->validated()['password'],
             'user_id' => Auth::id()
         ]);
