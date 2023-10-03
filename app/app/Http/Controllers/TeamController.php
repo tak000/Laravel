@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\Team;
+use App\Models\User;
+
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
@@ -28,9 +30,13 @@ class TeamController extends Controller
                 ->withInput();
         }
 
-        Team::create([
-            'name' => $validated->validated()['name'],
+        $team = Team::create([
+            'name' => $validated->validated()['name']
         ]);
+
+
+
+        $team->user()->attach(Auth::id());
 
         
  
