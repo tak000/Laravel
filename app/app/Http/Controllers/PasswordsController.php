@@ -27,7 +27,7 @@ class PasswordsController extends Controller
         ]);
 
         if ($validated->fails()) {
-            return redirect('/formulaire')
+            return redirect('/add-password')
                 ->withErrors($validated)
                 ->withInput();
         }
