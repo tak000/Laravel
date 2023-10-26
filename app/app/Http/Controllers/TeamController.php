@@ -19,7 +19,6 @@ class TeamController extends Controller
 {
     public function store(Request $request): RedirectResponse
     {
-
         $validated = Validator::make($request->all(),[
             'name' => 'required|string'
         ]);
@@ -34,13 +33,15 @@ class TeamController extends Controller
             'name' => $validated->validated()['name']
         ]);
 
-
-
         $team->user()->attach(Auth::id());
 
-        
- 
         return redirect('/dashboard');
+    }
+
+    public function getTeams(){
+        $data = null;
+
+       return view('teams',['data'=>$data]);
     }
 }
 

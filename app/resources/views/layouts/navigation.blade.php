@@ -13,16 +13,19 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        Dashboard
                     </x-nav-link>
                     <x-nav-link :href="route('add-password')" :active="request()->routeIs('add-password')">
-                        {{ __('Register password') }}
+                        {{ __('passwordForm.title') }}
                     </x-nav-link>
                     <x-nav-link :href="route('passwords')" :active="request()->routeIs('passwords')">
-                        {{ __('See passwords') }}
+                        {{ __('password.title') }}
                     </x-nav-link>
                     <x-nav-link :href="route('create-team')" :active="request()->routeIs('create-team')">
-                        {{ __('Make a team') }}
+                        {{ __('createTeam.title') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('teams')" :active="request()->routeIs('teams')">
+                        {{ __('teams.title') }}
                     </x-nav-link>
                 </div>
             </div>

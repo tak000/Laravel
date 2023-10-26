@@ -2,11 +2,10 @@
 
 return [
 
+    'title' => 'See passwords',
     'website' => 'Website',
     'login' => 'Login',
     'password' => 'Password',
     'edit' => 'edit',
-
-
 
 ];

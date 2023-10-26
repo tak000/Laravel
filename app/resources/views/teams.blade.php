@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel - formulaire</title>
+        <title>Laravel - Mots de passes enregistré</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -16,81 +16,40 @@
         </style>
     </head>
     <body class="antialiased">
-            
-    <x-app-layout>
-        <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('createTeam.title') }}
-            </h2>
-        </x-slot>
 
-        <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-            @if (Route::has('login'))
-                <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
-                    @auth
-                        <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</a>
-                    @else
-                        <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
+        <x-app-layout>
+            <x-slot name="header">
+                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                    {{ __('teams.title') }}
+                </h2>
+            </x-slot>
+            <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
+                <div class="max-w-7xl mx-auto p-6 lg:p-8">
+                    <style>
+                        .mt-16 :is(table, td, th){
+                            color: white;
+                            border: 1px solid #FF2D20;
+                        }
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
+                        .mt-16 th{
+                            background-color: #FF2D20;
+                        }
 
-            <div class="max-w-7xl mx-auto p-6 lg:p-8">
-                
-                <!-- style custom -->
-                <style>
-                    form{
-                        color: white; 
-                        display: flex; 
-                        flex-direction: column;
-                    }
+                        .mt-16 td{
+                            padding: 5px 20px;
+                        }
+                    </style>
 
-                    form input[type="submit"]{
-                        margin-top: 6px;
-                        background-color:#FF2D20 !important;
-                        cursor: pointer;
-                        border-radius: 3px;
-                    }
+                    <div class="mt-16">
 
-                    form input{
-                        color: black;
-                    }
-
-                    form p{
-                        color:#FF2D20;
-                    }
-
-
-                    #error {
-                        display:none;
-                        margin-top:1vh;
-                        background-color:#FF2D20;
-                        color:white;
-                        border-radius: 10px;
-                        padding:10px;
-                    }
-                </style>
-
-                <div class="mt-16">
-                    <form method="POST" action="/post-team">
-                        @csrf
-                        <label for="name">{{__('createTeam.name')}}</label>
-                        <input type="text" name="name" require>
-                        @if($errors->has('name'))
-                            <p>{{$errors->first('name')}}</p>
-                        @endif
-                        <input type="submit" value="{{__('createTeam.create')}}">
                         
-                    </form>
-                </div>
+                    </div>
 
                 </div>
-        </div>
-    </x-app-layout>
-
+            </div>
+        </x-app-layout>
+        
     </body>
 </html>
+
+
