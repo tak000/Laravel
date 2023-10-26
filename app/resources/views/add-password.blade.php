@@ -78,19 +78,19 @@
                 <div class="mt-16">
                     <form method="POST" action="/post-login">
                         @csrf
-                        <label for="url">Entrer votre url</label>
+                        <label for="url">{{__('passwordForm.url')}}</label>
                         <input type="text" name="url" require>
                         @if($errors->has('url'))
                             <p>{{$errors->first('url')}}</p>
                         @endif
-                        <label for="login">Entrer votre login</label>
+                        <label for="login">{{__('passwordForm.login')}}</label>
                         <input type="text" name="login" require>
                         @if($errors->has('login'))
                             <p>{{$errors->first('login')}}</p>
                         @endif
-                        <label for="password">Entrer votre mot de passe</label>
+                        <label for="password">{{__('passwordForm.password')}}</label>
                         <input type="password" name="password" require>
-                        <input type="submit" value="Enregistrer">
+                        <input type="submit" value="{{__('passwordForm.register')}}">
                         
                     </form>
                 </div>

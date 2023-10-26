@@ -78,12 +78,12 @@
                 <div class="mt-16">
                     <form method="POST" action="/post-team">
                         @csrf
-                        <label for="name">Entrer votre nom de groupe</label>
+                        <label for="name">{{__('createTeam.name')}}</label>
                         <input type="text" name="name" require>
                         @if($errors->has('name'))
                             <p>{{$errors->first('name')}}</p>
                         @endif
-                        <input type="submit" value="Créer">
+                        <input type="submit" value="{{__('createTeam.create')}}">
                         
                     </form>
                 </div>

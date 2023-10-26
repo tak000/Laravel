@@ -59,9 +59,9 @@
                             <form method="POST" action="/edit-password">
                                 @csrf
                                 <input type="hidden" value="{{$id}}" name="id">
-                                <label for="password">Entrer votre nouveau mot de passe</label>
+                                <label for="password">{{__('passwordEdit.new')}}</label>
                                 <input type="text" name="password" require>
-                                <input type="submit" value="Enregistrer">
+                                <input type="submit" value="{{__('passwordEdit.save')}}">
                                 
                             </form>
                             

@@ -45,9 +45,9 @@
                             @auth
                             <table>
                                 <tr>
-                                    <th>Site</th>
-                                    <th>Login</th>
-                                    <th>Password</th>
+                                    <th>{{__('password.website')}}</th>
+                                    <th>{{__('password.login')}}</th>
+                                    <th>{{__('password.password')}}</th>
                                     <th></th>
                                 </tr>
 
@@ -58,7 +58,7 @@
                                         <td>{{ $password->password }}</td>
                                         <td>
                                         <x-nav-link :href="route('password-change', ['id' => $password->id])">
-                                            modifier
+                                            {{__('password.edit')}}
                                         </x-nav-link>
                                         </td>
                                     </tr>
