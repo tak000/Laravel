@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel - Mots de passes enregistré</title>
+        <title>Laravel - Ajouter un membre a une équipe</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -26,58 +26,60 @@
             <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
                 <div class="max-w-7xl mx-auto p-6 lg:p-8">
                     <style>
-                        .mt-16 .team{
-                            border:1px solid rgb(255, 45, 32);
-                            border-radius: 5px;
-                            padding:15px;
-                            margin: 20px;
-
-                            width: 30vw;
+                        form{
+                            color: white; 
+                            display: flex; 
+                            flex-direction: column;
                         }
 
-                        .mt-16 .team>h3{
-                            font-size:1.5rem;
-                            color: white;
+                        form input[type="submit"]{
+                            margin-top: 6px;
+                            background-color:#FF2D20 !important;
+                            cursor: pointer;
+                            border-radius: 3px;
                         }
 
-                        .mt-16 .team>p{
-                            color: rgb(209, 213, 219);
+                        form input{
+                            color: black;
                         }
 
-                        .mt-16 .team>div:first-of-type{
-                            margin-top: 10px;
-                        }
-
-                        .mt-16 .team>div{
-                            border-radius: 5px;
-                            background-color: #3a3a3a;
-                            width: 100%;
-                            padding:2px 15px;
-                            margin-bottom:5px;
-                            color: rgb(209, 213, 219);
+                        form p{
+                            color:#FF2D20;
                         }
 
 
-                        
+                        #error {
+                            display:none;
+                            margin-top:1vh;
+                            background-color:#FF2D20;
+                            color:white;
+                            border-radius: 10px;
+                            padding:10px;
+                        }
                     </style>
 
                     <div class="mt-16">
-
-                        @foreach ($data['teams'] as $team)
-                            <div class="team">
-                                <h3>{{$team->name}}</h3>
-                                <p>Created : {{$team->created_at->format('Y-m-d');}}</p>
-                                <p>Membres :</p>
-                                @foreach ($data['teamUsers'][$team->name] as $username)
-                                    <div>
-                                        {{$username}}
-                                    </div>
-                                @endforeach
-                                
-                            </div>
-                           
-                        @endforeach
-                        
+                        <form method="POST" action="/post-member">
+                            @csrf
+                            <label for="team">Equipe d'ajout</label>
+                            <input type="text" name="team" require>
+                            @if($errors->has('belongTeam'))
+                                <p>{{$errors->first('belongTeam')}}</p>
+                            @endif
+                            @if($errors->has('team404'))
+                                <p>{{$errors->first('team404')}}</p>
+                            @endif
+                            <label for="member">Utilisateur</label>
+                            <input type="text" name="member" require>
+                            @if($errors->has('user404'))
+                                <p>{{$errors->first('user404')}}</p>
+                            @endif
+                            @if($errors->has('alreadyIn'))
+                                <p>{{$errors->first('alreadyIn')}}</p>
+                            @endif
+                            <input type="submit" value="Ajouter l'utilisateur">
+                            
+                        </form>
                     </div>
 
                 </div>

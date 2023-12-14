@@ -2,6 +2,6 @@
 
 return [
 
-    'title' => 'Équipes',
+    'title' => 'Mes Équipes',
 
 ];

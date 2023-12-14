@@ -13,7 +13,7 @@ class Team extends Model
 
     protected $fillable = ['name'];
 
-    public function user(){
+    public function users(){
         return $this->belongsToMany(User::class);
     }
 

@@ -59,6 +59,15 @@ Route::get('/create-team', function () {
 Route::post('/post-team', [TeamController::class, 'store']);
 
 //* requette de récupération des mots de passes de l'utilisateur (et redirection vers pas de visualisation)
-Route::get('/teams', [TeamController::class, 'getTeams'])->name('teams');
+Route::get('/teams', [TeamController::class, 'getUserTeams'])->name('teams');
+
+//* formulaire d'ajout de membre d'équipe
+Route::get('/add-member', function () {
+    return view('add-member');
+})->name('add-member');
+
+//* requette d'ajout d'un membre a une équipe
+Route::post('/post-member', [TeamController::class, 'joinTeam']);
+
 
 require __DIR__.'/auth.php';
