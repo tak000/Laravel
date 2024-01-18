@@ -7,16 +7,25 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
+use Illuminate\Support\HtmlString;
+
 class newMember extends Notification
 {
     use Queueable;
 
+    protected $user;
+    protected $team;
+    protected $newMember;
+
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct($newMember, $team, $user)
     {
-        //
+        $this->user = $user;
+        $this->team = $team;
+        $this->newMember = $newMember;
+
     }
 
     /**
@@ -26,7 +35,7 @@ class newMember extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -34,9 +43,10 @@ class newMember extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
+
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
+                    ->from('PassManager@mail.com', 'PassManager')
+                    ->line(new HtmlString('<strong>'.$this->newMember->name.'</strong> has been added to <strong>'.$this->team->name.'</strong> by <strong>'.$this->user->name.'</strong>  at <strong>'. now() .'</strong>'))
                     ->line('Thank you for using our application!');
     }
 
@@ -48,7 +58,10 @@ class newMember extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            //
+            "host_user" => $this->team->name,
+            "team" => $this->team->name,
+            "added_user" => $this->newMember->name,
+            "date" => now()
         ];
     }
 }

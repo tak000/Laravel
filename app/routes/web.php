@@ -70,4 +70,8 @@ Route::get('/add-member', function () {
 Route::post('/post-member', [TeamController::class, 'joinTeam']);
 
 
+
+//* page de formulaire de modification d'un mot de passe
+// Route::get('/add-team-password/{id}', [::class, 'passwordChangePage'])->name('team-password');
+
 require __DIR__.'/auth.php';

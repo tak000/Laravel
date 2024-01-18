@@ -14,6 +14,9 @@ use Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\newMember;
+
 
 class TeamController extends Controller
 {
@@ -83,6 +86,7 @@ class TeamController extends Controller
         if($team->users->contains($user)){
             if(!$team->users->contains($member)){
                 $team->users()->attach($member->id);
+                $team->users->each(fn($element) => $element->notify(new newMember($member, $team, $user)));
             }else{
                 return redirect()->back()->withErrors(['alreadyIn' => "The user is already in that team"]);
             }
@@ -91,13 +95,7 @@ class TeamController extends Controller
         }
 
         // redirect back withErrors ....
-
-
-
-
-
-
-
+return redirect()->back();
     }
 }
 
