@@ -23,4 +23,8 @@ class Password extends Model
     public function users(){
         return $this->belongsTo(User::class);
     }
+
+    public function teams() {
+        return $this->belongsToMany(Team::class);
+    }
 }

@@ -76,10 +76,18 @@
                 </style>
 
                 <div class="mt-16">
-                    <form method="POST" action="/post-login">
+                    <form method="POST" action="/post-team-password">
                         @csrf
-                        <label for="url">{{__('passwordForm.url')}}</label>
+                        <input type="hidden" value="{{$id}}" name="id">
+                        <label for="url">url</label>
                         <input type="text" name="url" require>
+                        
+                        <label for="login">Login</label>
+                        <input type="text" name="login" require>
+
+                        <label for="password">Password</label>
+                        <input type="password" name="password" require>
+                        <input type="submit" value="Register">
                     </form>
                 </div>
 

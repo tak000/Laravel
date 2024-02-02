@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PasswordsController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\TeamPasswordController;
 
 
 /*
@@ -71,7 +72,10 @@ Route::post('/post-member', [TeamController::class, 'joinTeam']);
 
 
 
-//* page de formulaire de modification d'un mot de passe
-// Route::get('/add-team-password/{id}', [::class, 'passwordChangePage'])->name('team-password');
+//* page de formulaire de d'ajout de mot de passe d'équipe
+Route::get('/add-team-password/{id}', [TeamPasswordController::class, 'newPasswordPage'])->name('add-team-password');
+
+//* requette de d'ajout de mot de passe d'équipe
+Route::post('/post-team-password', [TeamPasswordController::class, 'createTeamPassword'])->name('post-team-password');
 
 require __DIR__.'/auth.php';
