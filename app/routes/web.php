@@ -18,11 +18,13 @@ use App\Http\Controllers\TeamPasswordController;
 |
 */
 
+//TODO change
 //* racine du site
 Route::get('/', function () {
     return view('welcome');
 });
 
+//TODO change
 //* dashboard
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -34,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+//TODO change
 //* formulaire d'ajout de mot de passe
 Route::get('/add-password', function () {
     return view('add-password');
@@ -42,7 +45,7 @@ Route::get('/add-password', function () {
 //* requette d'enregistrement d'un nouveau mot de passe
 Route::post('/post-login', [PasswordsController::class, 'store']);
 
-//* requette de récupération des mots de passes de l'utilisateur (et redirection vers pas de visualisation)
+//* requette de récupération des mots de passes de l'utilisateur
 Route::get('/passwords', [PasswordsController::class, 'getPasswords'])->name('passwords');
 
 //* page de formulaire de modification d'un mot de passe
@@ -51,6 +54,7 @@ Route::get('/password-change/{id}', [PasswordsController::class, 'passwordChange
 //* requette de modification de mot de passe
 Route::post('/edit-password', [PasswordsController::class, 'editPassword'])->name('edit-password');
 
+//TODO change
 //* formulaire de création d'équipe
 Route::get('/create-team', function () {
     return view('create-team');
@@ -59,13 +63,11 @@ Route::get('/create-team', function () {
 //* requette de création de team
 Route::post('/post-team', [TeamController::class, 'store']);
 
-//* requette de récupération des mots de passes de l'utilisateur (et redirection vers pas de visualisation)
+//* requette de récupération des mots de passes de l'utilisateur
 Route::get('/teams', [TeamController::class, 'getUserTeams'])->name('teams');
 
 //* formulaire d'ajout de membre d'équipe
-Route::get('/add-member', function () {
-    return view('add-member');
-})->name('add-member');
+Route::get('/add-member/{id}', [TeamController::class, 'newTeamMemberPage'])->name('add-member');
 
 //* requette d'ajout d'un membre a une équipe
 Route::post('/post-member', [TeamController::class, 'joinTeam']);

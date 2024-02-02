@@ -20,32 +20,40 @@ use App\Notifications\newMember;
 
 class TeamController extends Controller
 {
+    //* méthode de création d'une team
     public function store(Request $request): RedirectResponse
     {
+        //validation
         $validated = Validator::make($request->all(),[
             'name' => 'required|string'
         ]);
 
+        //echec validation check
         if ($validated->fails()) {
             return redirect('/create-team')
                 ->withErrors($validated)
                 ->withInput();
         }
 
+        //requette creation team
         $team = Team::create([
             'name' => $validated->validated()['name']
         ]);
 
+        //creation de la relation team-user
         $team->users()->attach(Auth::id());
 
+        //redirection vers la page d'acceuil
         return redirect('/dashboard');
     }
 
+    //* méthode d'obtention des team auquel l'utilisateur appartient ainsi que les autres membres
     public function getUserTeams(){
+        //requette d'obtention des teams lié a l'utilisateur
         $teams = Auth::user()->teams;
         $teamUsers = [];
 
-        // Retrieve users for each team and store them in an array
+        // Assignation des utilisateurs a chaque team
         foreach ($teams as $team) {
             $teamUsers[$team->name] = $team->users()->pluck('name')->toArray();
         }
@@ -55,17 +63,21 @@ class TeamController extends Controller
             'teamUsers' => $teamUsers
         ];
 
-       return view('teams',['data'=>$data]);
+        //redirection vers page avec les informations
+        return view('teams',['data'=>$data]);
     }
 
+    //* méthode d'assignation d'un utilisateur à une team
     public function joinTeam(Request $request): RedirectResponse {
         $user = Auth::user();
 
+        //validation
         $validated = Validator::make($request->all(),[
-            'team' => 'required|string',
+            'teamid' => 'required|integer',
             'member' => 'required|string',
         ]);
 
+        //echec validation check
         if ($validated->fails()) {
             return redirect('/add-member')
                 ->withErrors($validated)
@@ -73,7 +85,7 @@ class TeamController extends Controller
         }
 
         $member = User::where('name', $validated->validated()['member'])->first();
-        $team = Team::where('name', $validated->validated()['team'])->first();
+        $team = Team::where('id', $validated->validated()['teamid'])->first();
 
         if(!$member){
             return redirect()->back()->withErrors(['user404' => "This user does not exist"]);
@@ -95,7 +107,13 @@ class TeamController extends Controller
         }
 
         // redirect back withErrors ....
-return redirect()->back();
+        return redirect()->back();
+    }
+
+    //! ! test avec autocompleted team id
+    public function newTeamMemberPage($id)
+    {
+        return view('add-member', ['id'=>$id]);
     }
 }
 

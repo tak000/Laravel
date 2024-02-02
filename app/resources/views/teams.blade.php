@@ -74,6 +74,12 @@
                                     </div>
                                 @endforeach
                                 
+                                <x-nav-link :href="route('add-team-password', ['id' => $team->id])">
+                                    Ajouter un mot de passe a une team
+                                </x-nav-link>
+                                <x-nav-link :href="route('add-member', ['id' => $team->id])">
+                                    Ajouter un membre
+                                </x-nav-link>
                             </div>
                            
                         @endforeach

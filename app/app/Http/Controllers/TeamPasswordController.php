@@ -9,11 +9,13 @@ use Validator;
 
 class TeamPasswordController extends Controller
 {
+    //* redirection vers la page d'ajout d'un mot de passe à une team
     public function newPasswordPage($id)
     {
         return view('add-team-password', ['id'=>$id]);
     }
 
+    //* méthode de création d'un mot de passe assigné à une team
     public function createTeamPassword(Request $request)
     {
         $validated = Validator::make($request->all(),[

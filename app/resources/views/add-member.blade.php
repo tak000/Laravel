@@ -61,8 +61,7 @@
                     <div class="mt-16">
                         <form method="POST" action="/post-member">
                             @csrf
-                            <label for="team">Equipe d'ajout</label>
-                            <input type="text" name="team" require>
+                            <input type="hidden" value="{{$id}}" name="teamid">
                             @if($errors->has('belongTeam'))
                                 <p>{{$errors->first('belongTeam')}}</p>
                             @endif
