@@ -98,6 +98,7 @@ class TeamController extends Controller
         if($team->users->contains($user)){
             if(!$team->users->contains($member)){
                 $team->users()->attach($member->id);
+                // notif
                 $team->users->each(fn($element) => $element->notify(new newMember($member, $team, $user)));
             }else{
                 return redirect()->back()->withErrors(['alreadyIn' => "The user is already in that team"]);

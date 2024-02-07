@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PasswordsController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TeamPasswordController;
+use App\Http\Controllers\ViewController;
 
 
 /*
@@ -18,17 +19,11 @@ use App\Http\Controllers\TeamPasswordController;
 |
 */
 
-//TODO change
 //* racine du site
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ViewController::class, 'homepage'])->name('welcome');
 
-//TODO change
 //* dashboard
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [ViewController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -36,11 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//TODO change
 //* formulaire d'ajout de mot de passe
-Route::get('/add-password', function () {
-    return view('add-password');
-})->name('add-password');
+Route::get('/add-password', [ViewController::class, 'addPassword'])->name('add-password');
 
 //* requette d'enregistrement d'un nouveau mot de passe
 Route::post('/post-login', [PasswordsController::class, 'store']);
@@ -54,11 +46,8 @@ Route::get('/password-change/{id}', [PasswordsController::class, 'passwordChange
 //* requette de modification de mot de passe
 Route::post('/edit-password', [PasswordsController::class, 'editPassword'])->name('edit-password');
 
-//TODO change
 //* formulaire de création d'équipe
-Route::get('/create-team', function () {
-    return view('create-team');
-})->name('create-team');
+Route::get('/create-team', [ViewController::class, 'createTeam'])->name('create-team');
 
 //* requette de création de team
 Route::post('/post-team', [TeamController::class, 'store']);

@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Team;
 
 use App\Models\Password;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Validator;
+
+use App\Notifications\newPasswordTeam;
 
 class TeamPasswordController extends Controller
 {
@@ -18,6 +21,9 @@ class TeamPasswordController extends Controller
     //* méthode de création d'un mot de passe assigné à une team
     public function createTeamPassword(Request $request)
     {
+        $user = Auth::user();
+        $team = Team::where('id', $request->id)->first();
+
         $validated = Validator::make($request->all(),[
             'id' => 'required|integer',
             'url' => 'required|url',
@@ -39,7 +45,9 @@ class TeamPasswordController extends Controller
             'user_id' => Auth::id()
         ]);
 
-        $password->teams()->attach($request->id);
+        $password->teams()->attach($validated->validated()['id']);
+
+        $team->users->each(fn($element) => $element->notify(new newPasswordTeam($user, $team, $validated->validated()['url'])));
  
         return redirect('/teams');
     }
