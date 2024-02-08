@@ -44,7 +44,7 @@ class TeamController extends Controller
         $team->users()->attach(Auth::id());
 
         //redirection vers la page d'acceuil
-        return redirect('/dashboard');
+        return redirect('/teams');
     }
 
     //* méthode d'obtention des team auquel l'utilisateur appartient ainsi que les autres membres
@@ -107,12 +107,10 @@ class TeamController extends Controller
             return redirect()->back()->withErrors(['belongTeam' => "You cannot invite in a team you're not in"]);
         }
 
-        // redirect back withErrors ....
-        return redirect()->back();
+        return redirect("/teams");
     }
 
-    //! ! test avec autocompleted team id
-    public function newTeamMemberPage($id)
+    public function TeamMemberPage($id)
     {
         return view('add-member', ['id'=>$id]);
     }

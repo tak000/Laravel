@@ -46,8 +46,8 @@ class newMember extends Notification
 
         return (new MailMessage)
                     ->from('PassManager@mail.com', 'PassManager')
-                    ->line(new HtmlString('<strong>'.$this->newMember->name.'</strong> has been added to <strong>'.$this->team->name.'</strong> by <strong>'.$this->user->name.'</strong>  at <strong>'. now() .'</strong>'))
-                    ->line('Thank you for using our application!');
+                    ->line(new HtmlString('<strong>'.$this->newMember->name.'</strong> '. __('notif.beenadded') .' <strong>'.$this->team->name.'</strong> '. __('notif.by') .' <strong>'.$this->user->name.'</strong> '. __('notif.at') .' <strong>'. now() .'</strong>'))
+                    ->line(__('notif.thanks'));
     }
 
     /**

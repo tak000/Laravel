@@ -56,7 +56,7 @@ Route::post('/post-team', [TeamController::class, 'store']);
 Route::get('/teams', [TeamController::class, 'getUserTeams'])->name('teams');
 
 //* formulaire d'ajout de membre d'équipe
-Route::get('/add-member/{id}', [TeamController::class, 'newTeamMemberPage'])->name('add-member');
+Route::get('/add-member/{id}', [TeamController::class, 'TeamMemberPage'])->name('add-member');
 
 //* requette d'ajout d'un membre a une équipe
 Route::post('/post-member', [TeamController::class, 'joinTeam']);
