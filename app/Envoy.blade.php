@@ -8,6 +8,7 @@
 @endstory
 
 @task('update-dependencies', ['on' => 'web'])
+    cd /home/justin-card/justin-card.dhonnabhain.me/app
     composer install
     npm install
     npm run build
@@ -16,11 +17,13 @@
 
 
 @task('migrate', ['on' => 'web'])
-    php artisan migrate
+    cd /home/justin-card/justin-card.dhonnabhain.me/app
+    php artisan migrate --force
 @endtask
 
 
 @task('optimise', ['on' => 'web'])
+    cd /home/justin-card/justin-card.dhonnabhain.me/app
     composer install --optimize-autoloader --no-dev
     php artisan optimize:clear
     php artisan optimize
