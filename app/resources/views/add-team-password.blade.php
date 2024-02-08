@@ -79,13 +79,13 @@
                     <form method="POST" action="/post-team-password">
                         @csrf
                         <input type="hidden" value="{{$id}}" name="id">
-                        <label for="url">url</label>
+                        <label for="url">{{__('addTeamPassword.url')}}</label>
                         <input type="text" name="url" require>
                         
-                        <label for="login">Login</label>
+                        <label for="login">{{__('addTeamPassword.login')}}</label>
                         <input type="text" name="login" require>
 
-                        <label for="password">Password</label>
+                        <label for="password">{{__('addTeamPassword.password')}}</label>
                         <input type="password" name="password" require>
                         <input type="submit" value="Register">
                     </form>
