@@ -7,5 +7,6 @@ return [
     'login' => 'Login',
     'password' => 'Password',
     'edit' => 'edit',
+    'connect' => 'Please connect first'
 
 ];

@@ -68,7 +68,7 @@
                             @if($errors->has('team404'))
                                 <p>{{$errors->first('team404')}}</p>
                             @endif
-                            <label for="member">Utilisateur</label>
+                            <label for="member">{{__('addMember.user')}}</label>
                             <input type="text" name="member" require>
                             @if($errors->has('user404'))
                                 <p>{{$errors->first('user404')}}</p>
@@ -76,7 +76,7 @@
                             @if($errors->has('alreadyIn'))
                                 <p>{{$errors->first('alreadyIn')}}</p>
                             @endif
-                            <input type="submit" value="Ajouter l'utilisateur">
+                            <input type="submit" value="{{__('addMember.submit')}}">
                             
                         </form>
                     </div>

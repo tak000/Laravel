@@ -7,5 +7,7 @@ return [
     'login' => 'Identifiant',
     'password' => 'Mot de passe',
     'edit' => 'modifier',
+    'connect' => "Connecter vous d'abord"
+
 
 ];

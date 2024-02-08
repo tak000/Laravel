@@ -66,7 +66,7 @@
                             </form>
                             
                             @else
-                            <h2>Connecter vous d'abord</h2>
+                            <h2>{{__('password.connect')}}</h2>
                             @endauth
                         
                         @endif

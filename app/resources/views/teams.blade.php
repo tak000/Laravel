@@ -66,8 +66,8 @@
                         @foreach ($data['teams'] as $team)
                             <div class="team">
                                 <h3>{{$team->name}}</h3>
-                                <p>Created : {{$team->created_at->format('Y-m-d');}}</p>
-                                <p>Membres :</p>
+                                <p>{{__('teams.created')}} : {{$team->created_at->format('Y-m-d');}}</p>
+                                <p>{{__('teams.members')}} :</p>
                                 @foreach ($data['teamUsers'][$team->name] as $username)
                                     <div>
                                         {{$username}}
@@ -75,10 +75,10 @@
                                 @endforeach
                                 
                                 <x-nav-link :href="route('add-team-password', ['id' => $team->id])">
-                                    Ajouter un mot de passe a une team
+                                    {{__('teams.addpassword')}}
                                 </x-nav-link>
                                 <x-nav-link :href="route('add-member', ['id' => $team->id])">
-                                    Ajouter un membre
+                                    {{__('teams.addmember')}}
                                 </x-nav-link>
                             </div>
                            
