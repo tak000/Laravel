@@ -59,8 +59,12 @@ class PasswordsController extends Controller
     //* redirection vers page de changement d'un mot de passe
     public function passwordChangePage($id)
     {
-        // TODO faire un check de securite avec auth::id et user_id du mot de passe
-        $data = Password::where('id', $id)->get();
+        $data = Password::where('id', $id)->first();
+
+        //check appartenance
+        if(!($data->user_id === Auth::id())){
+            return redirect('/passwords');
+        }
 
         //redirection vers page de changement avec id
         return view('change-password', ['id'=>$id]);
